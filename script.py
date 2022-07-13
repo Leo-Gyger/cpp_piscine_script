@@ -10,13 +10,16 @@ def main():
     try:
         headerfile = open(sys.argv[1] + ".hpp",mode='x')
         classfile = open(sys.argv[1] + ".cpp",mode='x')
-        makefile = open("Makefile",mode='x')
     except:
         print("Error file already exist", file = sys.stderr)
         quit()
     createheader(headerfile)
     createclass(classfile)
-    createmake(makefile)
+    try:
+        makefile = open("Makefile",mode='x')
+        createmake(makefile)
+    except:
+        print("Makefile already exist but wasn't overwritten", file = sys.stderr)
 
 
 def createheader(file):
