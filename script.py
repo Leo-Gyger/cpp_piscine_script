@@ -1,13 +1,16 @@
 #!/usr/bin/python3
 import  sys
+import  os
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Error, needs 1 argument",file = sys.stderr)
+    if len(sys.argv) < 3:
+        print("Error, needs 2 arguments",file = sys.stderr)
         print("1. Name of the class",file = sys.stderr)
+        print("2. Location where you want your files to be created",file = sys.stderr)
         quit()
     try:
+        createfolder(sys.argv[2])
         headerfile = open(sys.argv[1] + ".hpp",mode='x')
         classfile = open(sys.argv[1] + ".cpp",mode='x')
     except:
@@ -21,6 +24,11 @@ def main():
     except:
         print("Makefile already exist but wasn't overwritten", file = sys.stderr)
 
+
+def createfolder(path):
+    path = os.path.join(os.getcwd(), path)
+    os.makedirs(path, exist_ok = True)
+    os.chdir(path)
 
 def createheader(file):
     file.write("#ifndef {}_HPP\n".format(sys.argv[1].upper()))
@@ -62,12 +70,13 @@ def createmake(file):
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -o
 NAME = ex00
+DIR_OBJ =   ./objs
 FILES = main.cpp\\
         {}.cpp
 
 all : $(NAME)
-OBJ = $(FILES:%.cpp=%.o)
 
+OBJ = $(FILES:%.cpp=%.o)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(NAME) $(FILES)
 fclean: clean
