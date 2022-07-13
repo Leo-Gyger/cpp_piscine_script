@@ -2,7 +2,6 @@
 import  sys
 import  os
 
-
 def main():
     if len(sys.argv) < 3:
         print("Error, needs 2 arguments",file = sys.stderr)
@@ -22,8 +21,16 @@ def main():
         makefile = open("Makefile",mode='x')
         createmake(makefile)
     except:
-        print("Makefile already exist but wasn't overwritten", file = sys.stderr)
+        editmake()
 
+def editmake():
+    file = open("Makefile")
+    lines = file.readlines()
+    print(lines[7])
+    lines[7] = "\nFILES += {}.cpp\n".format(sys.argv[1])
+    file.close()
+    file = open("Makefile", 'w')
+    file.writelines(lines)
 
 def createfolder(path):
     path = os.path.join(os.getcwd(), path)
