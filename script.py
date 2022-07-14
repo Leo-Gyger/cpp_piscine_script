@@ -76,7 +76,7 @@ def createmake(file):
     file.write('''CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -o
-NAME = ex00
+NAME = {}
 DIR_OBJ =   ./objs
 FILES = main.cpp\\
         {}.cpp
@@ -92,6 +92,6 @@ clean:
 	rm -f $(OBJ)
 re: fclean clean all
 
-.PHONY: clean fclean all re'''.format(sys.argv[1]))
+.PHONY: clean fclean all re'''.format(sys.argv[2], sys.argv[1]))
     file.close()
 main()
