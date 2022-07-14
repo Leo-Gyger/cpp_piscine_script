@@ -8,7 +8,8 @@ canonical standard and therefore has a default constructor, a copy constructor,
 an overload of the assignment operator and a destructor.
 
 It also creates the class file with all of the functions declared in the header
-file in it. As well as a Makefile
+file in it. As well as a Makefile that will be edited each time you add
+a new class in the same folder.
 
 ## Usage
 Simply launch it as you would with any script (it has a shebang) and pass as
