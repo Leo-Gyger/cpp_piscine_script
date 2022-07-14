@@ -26,11 +26,11 @@ def main():
 def editmake():
     file = open("Makefile")
     lines = file.readlines()
-    print(lines[7])
     lines[7] = "\nFILES += {}.cpp\n".format(sys.argv[1])
     file.close()
     file = open("Makefile", 'w')
     file.writelines(lines)
+    file.close()
 
 def createfolder(path):
     path = os.path.join(os.getcwd(), path)
