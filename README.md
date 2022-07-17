@@ -1,5 +1,5 @@
 # cpp_piscine_script
-a script to automate the creation of a Makefile and of canonical classes in c++
+A script to automate the creation of a Makefile and of canonical classes in c++
 
 ## What does it do
 This script creates one header file (with header guards) that has one class
