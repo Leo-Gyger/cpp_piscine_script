@@ -17,5 +17,10 @@ a new class in the same folder.
 
 Simply launch it as you would with any script (it has a shebang) and pass as
 argument the name of the class you wish to create and pass as a second,
-argument the location where you want your files to be created, for example
-./script.py cat ex00 will create the folder ex00 and add the files inside it.
+argument the location where you want your files to be created, for example:
+
+```sh
+./script.py cat ex00
+```
+
+will create the folder ex00 and add the files inside it.
