@@ -1,13 +1,24 @@
 #!/usr/bin/python3
 import  sys
 import  os
+import  re
 
 def main():
     if len(sys.argv) < 3:
-        print("Error, needs 2 arguments",file = sys.stderr)
+        print("Error, needs 2 or 3 arguments",file = sys.stderr)
         print("1. Name of the class",file = sys.stderr)
         print("2. Location where you want your files to be created",file = sys.stderr)
+        print("3. (optional) name of the class that you want 1. to be a copy of with a new name",file = sys.stderr)
         quit()
+    if len(sys.argv) == 4:
+        createfolder(sys.argv[2])
+        copy_replace()
+        try:
+            makefile = open("Makefile", mode='x')
+            createmake(makefile)
+        except:
+            editmake()
+            quit()
     try:
         createfolder(sys.argv[2])
         headerfile = open(sys.argv[1] + ".hpp",mode='x')
@@ -22,6 +33,19 @@ def main():
         createmake(makefile)
     except:
         editmake()
+
+def copy_replace():
+    with open(sys.argv[1] + ".hpp", mode='r') as header:
+                text = header.read()
+                ntext = re.sub(sys.argv[1], sys.argv[3], text)
+                ntext = re.sub(sys.argv[1].upper(), sys.argv[3].upper(), ntext)
+                with open(sys.argv[3] + ".hpp", mode='w') as nheader:
+                    nheader.write(ntext)
+    with open(sys.argv[1] + ".cpp", mode='r') as file:
+                text = file.read()
+                ntext = re.sub(sys.argv[1], sys.argv[3], text)
+                with open(sys.argv[3] + ".cpp", mode='w') as nfile:
+                    nfile.write(ntext)
 
 def editmake():
     file = open("Makefile")
